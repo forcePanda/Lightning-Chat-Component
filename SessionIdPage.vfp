@@ -1,0 +1,4 @@
+<apex:page >
+    <!-- The session Id is wrapped between two string literals 'ID' and 'END' -->
+    ID{!$Api.Session_ID}END
+</apex:page>
