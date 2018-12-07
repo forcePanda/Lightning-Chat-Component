@@ -1,0 +1,32 @@
+.THIS .linebreakClass{
+	display: block;
+    margin: 0rem 10%;
+    border-top: 3px solid rgb(221, 219, 218);
+    
+    height: 4px;
+    clear: both;
+    width: 80%;
+}
+.THIS .statusIconClass{
+    height: 20px;
+    width: 20px;
+    /* margin-bottom: 5px; */
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.THIS .barClass{
+    color: rgb(255, 255, 255);
+    height: 2.5rem;
+    background: rgb(6, 28, 63);
+    padding: 0 0.5rem;
+}
+
+.THIS .buttonClass{
+    border-radius: 3.25rem;
+}
+
+.THIS .ChatBoxClass{
+    height: 200px;
+    max-height: 250px;
+}
