@@ -6,10 +6,6 @@ public class ChatComponentController {
         public string[] OnlineUserIds;
     }
     
-    public ChatComponentController(){
-        
-    }
-    
     //To get the details of current logged in User
     @AuraEnabled
     public static user getCurrentUser(){
