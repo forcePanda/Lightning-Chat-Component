@@ -1,7 +1,5 @@
 <aura:component controller="ChatComponentController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
 	
-    <aura:attribute name="runJustOnce" type="Boolean" default="false"/>
-    
     <aura:attribute name="isChatActive" type="Boolean" default="false" /> <!-- Check if user is already chatting with any other user -->
     
     <aura:attribute name="UserList" type="User[]" />
@@ -13,7 +11,7 @@
     <aura:attribute name="showChatBox" type="Boolean" default="false"/> <!-- Show/Hide the chatbox -->
     
     <aura:attribute name="sub" type="Object" /> <!-- Subscription object -->
-    <aura:attribute name="channelName" type="string" default="/u/ChatChannel"/> <!-- To store the StreamingChannel name -->
+    <aura:attribute name="channelName" type="string" default="/u/ChatChannel"/> <!-- To store the StreamingChannel name, I have used a static channel name-->
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     
