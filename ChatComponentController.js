@@ -13,6 +13,7 @@
         $A.enqueueAction(action);
     },
     
+    /* Subscribing/Unsubscribing to the channel depending upon subscription state */
     handleSubscription  : function(component, event, helper) {
         //console.log('handleSubscription Called'); 
         
