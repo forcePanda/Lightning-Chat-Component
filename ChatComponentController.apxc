@@ -18,25 +18,21 @@ public class ChatComponentController {
         
         //Calling helper function to make the API callout
         httpresponse response=makeCallout('POST', message, userID);
-        system.debug(response);
-        
         return response.getStatusCode();
     }
     
     //Callout to get the list of users subscribed on to the channel
     @AuraEnabled
     public static user[] getOnlineUsers(){
-        system.debug('getOnlineUsers called');
         set<id> UserIds=new set<id>();
         httpResponse response=makeCallout('GET', NULL, NULL);
         ChannelResponse ResponseObject=new ChannelResponse();
-        system.debug(response.getBody());
         ResponseObject=(ChannelResponse)JSON.deserialize(response.getBody(), ChannelResponse.class);
         
         for(string UserId: ResponseObject.OnlineUserIds ){
             UserIds.add(UserId);
         }
-        system.debug('Id List: '+UserIds);
+        
         return [select id,name,firstname,lastName from user where id in :UserIds];        
     }
     
@@ -50,12 +46,11 @@ public class ChatComponentController {
         request.setEndpoint(BaseUrl+'/services/data/v44.0/sobjects/StreamingChannel/0M66F00000000wsSAA/push');
         request.setHeader('Authorization', 'Bearer ' + getSessionIdFromVfPage());
         request.setHeader('Content-Type','application/json; charset=UTF-8');
-		    request.setHeader('Accept','application/json');
+	request.setHeader('Accept','application/json');
         if(method=='POST')
-			    request.setBody('{"pushEvents": [{"payload": "'+message+'`'+userinfo.getUserId()+userinfo.getName()+'","userIds": ["'+userId+'"]}]}');
-        system.debug(request.getBody());
-        httpresponse response=http.send(request);
+	    request.setBody('{"pushEvents": [{"payload": "'+message+'`'+userinfo.getUserId()+userinfo.getName()+'","userIds": ["'+userId+'"]}]}');
         
+        httpresponse response=http.send(request);
         return response;
     }
     
