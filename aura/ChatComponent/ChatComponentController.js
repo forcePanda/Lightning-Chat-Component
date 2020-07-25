@@ -23,7 +23,9 @@
             helper.subscribe(component, event, helper);
             
             // Calling helper method to get the users subscribed to that channel
-            setTimeout( helper.getOnlineUsers(component, event) , 500);
+            setTimeout( $A.getCallback( function () {
+                helper.getOnlineUsers(component, event);
+            }), 500);
         }
     },
     

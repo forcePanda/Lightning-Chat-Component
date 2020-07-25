@@ -1,5 +1,7 @@
 public class ChatComponentController {
     
+    final static String channelName='/u/ChatChannel';
+
     //WrapperClass to handle the GET callout response 
     public class ChannelResponse{
         public string ChannelName;
@@ -43,15 +45,15 @@ public class ChatComponentController {
         system.debug('Id List: '+UserIds);
         return [select id,name,firstname,lastName from user where id in :UserIds];        
     }
-    
-    //Helper function to making the callouts
+
+    //Helper function to make the callouts
     private static httpresponse makeCallout(string method, string message, string userId){
         
         string BaseUrl=system.Url.getOrgDomainUrl().toExternalForm();
         http http = new http();
         httprequest request= new httprequest();
         request.setMethod(method);
-        request.setEndpoint(BaseUrl+'/services/data/v44.0/sobjects/StreamingChannel/0M66F00000000wsSAA/push');
+        request.setEndpoint(BaseUrl+'/services/data/v44.0/sobjects/StreamingChannel/'+getStreamingChannelId()+'/push');
         request.setHeader('Authorization', 'Bearer ' + getSessionIdFromVfPage());
         request.setHeader('Content-Type','application/json; charset=UTF-8');
 		request.setHeader('Accept','application/json');
@@ -78,6 +80,10 @@ public class ChatComponentController {
         Integer s = content.indexOf(startString) + startString.length();
         Integer e = content.indexOf(endString);
         return content.substring(s, e);
+    }
+
+    private static String getStreamingChannelId() {
+        return [SELECT Id FROM StreamingChannel WHERE Name = :channelName].Id;
     }
 
 }
